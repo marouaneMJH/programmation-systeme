@@ -7,10 +7,10 @@
 # 0: Succès
 
 # Vérifier le nombre d'arguments
-[[ $# -ne 1 ]] && echo "Cette commande prend seulement un fichier en argument." && exit 1
+[[ $# != 1 ]] && echo "Cette commande prend seulement un fichier en argument." && exit 1
 
-# Vérifier l'existence du fichier
-[[ ! -f $1 ]] && echo "Erreur : Le fichier '$1' n'existe pas." && exit 3
+# Vérifier l'existence et droit de lisibilité du fichier 
+[[ ! -r $1  ]] && echo "Le fichier '$1' n'existe pas ." && exit 3
 
 # Étapes :
 # 1. Copie la date et le contenu du fichier original dans un fichier temporaire (_tmp)
@@ -20,14 +20,15 @@
 {
     echo "$(date)"
     cat "$1"
-} > _tmp || { echo "Erreur : Impossible d'écrire dans _tmp."; exit 2; }
+} > _tmp 
 
 cat _tmp > "$1" || { 
-    echo "Erreur : Impossible de mettre à jour le fichier '$1'."; 
+    echo "Impossible de mettre à jour le fichier '$1'."; 
     rm _tmp; 
     exit 2; }
 
 rm _tmp 2> /dev/null
 
+[[ $? != 0 ]] && echo "Impossible de mettre à jour le fichier '$1'." && exit 2
 echo "La date a été ajoutée en tête du fichier '$1'."
-exit 0
+

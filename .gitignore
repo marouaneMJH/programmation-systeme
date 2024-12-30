@@ -1,2 +1,5 @@
-*.docx
 .gitignore
+*.docx
+output
+
+

@@ -1,9 +1,14 @@
 #!/bin/bash
 
 
-[[ $# == 0 ]] && echo "error: nombre d'argument." && exit 1
+# Les code de retour 
+# 1: Aucune argument saisi
+# 2: Le script est bien exécuté
 
-# parcourir les argument 
+
+[[ $# == 0 ]] && echo "Aucun argument saisi, vous devez entrer au moins un argument." && exit 1
+
+# parcourir les arguments
 for i in $*
 do
     # vérifier si l'utilisateur existe 
@@ -12,8 +17,10 @@ do
         # trouver le shell
         while read -r ligne
         do
-            echo nom: $i, repertoire du  connection: /home/$i, shell: "${ligne##*:}"
-        done < <(cat /etc/passwd | grep $i)  
+            echo nom: $i, répertoire du  connection: /home/$i, shell: "${ligne##*:}"
+        done < <(cat /etc/passwd | grep $i)   # le 
+    else
+        echo "L'utilisateur << $i >> n'existe pas."
     fi
 done 
 

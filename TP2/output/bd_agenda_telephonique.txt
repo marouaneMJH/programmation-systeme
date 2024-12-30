@@ -1,6 +1,0 @@
-numéro,nom,prénom
-123456,name,last_name
-223456,name,last_name
-33456,name,last_name
-523456,name,last_name
-623456,name,last_name
