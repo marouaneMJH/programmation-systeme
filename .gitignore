@@ -1,2 +1,2 @@
-.[D*.docs
-.*[1;5
+*.docx
+.gitignore
